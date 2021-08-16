@@ -31,9 +31,96 @@
         <div class="input-group mb-3" id="input-group">
             <input type="text" class="form-control" id="input-area">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-area">추가</button>
+                <button class="btn btn-outline-secondary" type="button" id="button-area" onclick="x()">추가</button>
             </div>
           </div>
     </div>
+    <!-- <script>
+
+      // 변수  숫자, 문자, boolean(참 거짓)
+      let a = "값"
+      let b = 100
+      let c = true
+      let d = false
+
+      let a2 = "은 뭘까요?"
+      let a3 = a + a2;
+      console.log(a3)
+
+      let b2 = 200;
+      let b3 = b2 + b;
+      console.log(b3)
+
+      let ab = a + b;
+      console.log(ab)
+
+      let c2 = 10 > 5;
+      console.log(c2)
+
+      console.log(b - b2)
+      console.log(b * b2)
+      console.log(b / b2)
+      console.log(b % b2) //나머지를 구할때 사용
+
+      let str = "문자";
+      let str2 = '문자';
+      let srr3 = `문자`; //벡틱 `` 안에는 변수 넣을 수 있다.
+      console.log(`저의 나이는 ${b}`)
+
+      //객체와 배열
+      let arr = [1,2,3,4,'문자',true,false]  //배열은 [] 사용   0,1,2,3,4,5,6 순으로 나옴
+      console.log(arr[5]) //몇번째의 함수를 찾아준다
+
+      arr.push("값") //값을 추가 할때 사용
+      console.log(arr)
+
+      let obj = {  //객체 사전형식
+        "key":"value",
+        "key2":"value2"
+      } 
+      console.log(obj)
+
+      let dic = [  //배열안에 객체를 넣는다 사전정의 - 갯수를 알려주고 내용을 알려줌
+        {"a":"apple"},
+        {"b":"banner"},
+        {"c":"cloud"}
+      ]
+      console.log(dic)
+
+    </script> -->
+    <!-- <script>
+      let api = {
+        "page": 1,
+        "total_results": 10000,
+        "total_pages": 500,
+        "results": [
+          {
+            "popularity": 3130.643,
+            "vote_conut": 143,
+            "video": false,
+            "genre_ids": [
+              18,
+              878,
+              53
+            ],
+            "title": "2067",
+            "vote_average": 5.8
+          }
+        ]
+      }
+      console.log(api.results[0].vote_conut) //변수안에 있는 객체를 꺼낼때
+    </script> -->
+    <script>
+      //for문 반복문
+      let arr = [1,2,3,4,5,6,7];
+      for(let i =0; i < arr.length; i++){
+
+        if(arr[i] % 2 == 0 || arr[i] == 2){   //&&-and  ||-or
+          console.log(arr[i])
+        }
+      }
+
+
+    </script>
 </body>
 </html>
