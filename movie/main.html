@@ -27,13 +27,13 @@
             <p class="lead">themoviedb라는 아주 훌륭한 무료 영화 데이터 베이스 플랫폼 API를 사용하여 영화 정보를 가져왔습니다.</p>
             <hr class="my-4">
             <p>I used the great free movie database platform API called themoviedb to get movie information.</p>
-            <a class="btn btn-danger btn-lg" href="#" role="button">히릿운동해야디~</a>
+            <a class="btn btn-danger btn-lg" href="https://api.themoviedb.org" role="button">키발급 받으러 가기</a>
         </div>
 
-        <div class="row row-cols-1 row-cols-md-3">
+        <div class="row row-cols-1 row-cols-md-3" id="move-list">
             <div class="col mb-4">
               <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <button type="button" class="btn btn-success" id="review-Bt" onclick="reviwe()">리뷰 보기</button>
@@ -47,7 +47,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+              <h5 class="modal-title">후기</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -56,19 +56,111 @@
               <p>Modal body text goes here.</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <input type="text" class="form-control" id="review" style="width:100%;">
+              <button type="button" class="btn btn-primary" onclick="addReview()">후기 작성</button>
             </div>
           </div>
         </div>
       </div>
     <script>
+      let traget_id = 0;
+      /*
+      
+        서버 개발자와의 대화
+
+        1. 리뷰 가져오기
+          API : http://universeapi.net/review/list?movie_id=
+
+          영화 리뷰 보기 버튼 클릭 -> 리뷰 정보 요청 API 실행과 동시에 영화 아이디 값 전달 -> 리뷰 데이터 응답으로 받고 보여주기
+
+        2. 리뷰 작성하기
+        
+          API : http://universeapi.net/review/add
+
+          리뷰 모달창에서 글 작성 -> 글과 영화 아이디 서버로 전달 -> 저장 성공 응답 받고 마무리
+      
+      */
+
+          $(document).ready(function(){   //웹페이지가 실행되자마자 실행되는 자바 및 제이쿼리는 여기에
+                console.log("시작!")
+
+                $.ajax({
+                  url:"https://api.themoviedb.org/3/movie/popular?api_key=e8e41d01b5d5dfeb3955f777656e797d", //도메인
+                  data:{"key":"value"},
+                  type:"GET",    //POST경우일때 data 에 "key":"value" 첨부
+                  success:function(json){
+                    console.log(json)
+
+                    $("#move-list").html('');
+                    let movie_list = json.results;
+
+                    for(let i = 0; i<movie_list.length; i++){
+                      let card = `<div class="col mb-4">
+                                    <div class="card h-100">
+                                      <img src="${'https://image.tmdb.org/t/p/w500/' + movie_list[i].poster_path}" class="card-img-top" alt="...">
+                                      <div class="card-body">
+                                        <h5 class="card-title">${movie_list[i].original_title}</h5>
+                                        <button type="button" class="btn btn-success" id="review-Bt" onclick="reviwe(${movie_list[i].id})">리뷰 보기</button>
+                                      </div>
+                                    </div>
+                                  </div>`
+
+
+                     $("#move-list").append(card)             
+                    }
+
+
+                  },
+                  error:function(err){
+
+                  }
+                })
+          })
         // var myModal = new bootstrap.Modal(document.getElementById('review-modal'), show)
         // function reviwe(){
         //     myModal.show()
         // }
-        function reviwe(){
-            $("#review-modal").modal('show');
+        function reviwe(id){
+
+          traget_id = id;
+
+          $.ajax({
+            url:`http://universeapi.net/review/list?movie_id=${id}`,
+            data:{},
+            type:"GET",
+            success:function(json){
+              console.log(json.data)
+
+              let reviews = json.data;
+
+              $(".modal-body").html('')
+              for(let i =0; i<reviews.length; i++){
+                $(".modal-body").append(`<p>${reviews[i].review}</p>`)
+              }
+            }
+          })
+
+          $("#review-modal").modal('show');
+        }
+
+        function addReview(){
+          let review = $("#review").val();
+          let review_html = `<p>${review}</p>`
+
+          $.ajax({
+            url:`http://universeapi.net/review/add`,
+            data:{
+              movie_id:traget_id,
+              review:review
+            },
+            type:"POST",
+            success:function(json){
+              console.log(json)
+            }
+          })
+
+          $(".modal-body").append(review_html);
+          $("#review").val();
         }
     </script>
 </body>
