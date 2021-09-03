@@ -52,7 +52,7 @@ console.log(infinity);
 console.log(negativeInfinity);
 console.log(nAn);
 
-// bigInt (fairly new, don't use it yet)
+// bigInt (fairly new, don't use it yet) dddd
 const bigInt = 1234567890123456798013245679801234567890n; // over (-2*53 ~ 2*53 )    bigInt - 크롬에서 지원
 console.log(`value: ${bigInt}, type: ${typeof bigInt}`); 
 Number.MAX_SAFE_INTEGER;
