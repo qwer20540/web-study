@@ -59,7 +59,7 @@ Number.MAX_SAFE_INTEGER;
 
 
 // string
-const char = 'c';
+const char = 'c'; //
 const brenden = 'brendan';
 const greeting = 'hello' + brenden;
 console.log(`value: ${greeting}, type: ${typeof greeting}`);
