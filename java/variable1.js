@@ -3,7 +3,7 @@
 //use this for valina Javascript
 'use strict';
 
-// 2. Variable
+// 2. Variable, rw(read/write) 읽고 다른값으로 변경 가능
 //let (added in ES6)
 // {}블럭임
 let globalName = 'globalName';
@@ -26,7 +26,7 @@ console.log(globalName);
 }
 console.log(age);
 
-// 3. Constants   값을 선언한 후 절대로 값을 변경할수 없음
+// 3. Constants, r(read only) 읽기만 가능  값을 선언한 후 절대로 값을 변경할수 없음
 // favor immutable data type always for a few reasons
 // - security 보안
 // - thread safety 값이 변하지않는
@@ -76,6 +76,7 @@ console.log(`value: ${test}, type: ${typeof test}`);
 
 // null
 let nothing = null;
+
 console.log(`value: ${nothing}, type: ${typeof nothing}`);
 
 //undefined
